@@ -707,7 +707,7 @@
       },
       {
         "id": "Fire-employee",
-        "text": "<p>Based on your advice, HR immediately fires Guy F. without giving him a chance to resign or finish any current tasks.</p><p>Your efforts led to identifying the correct suspect for the insider threat, along with mitigating this threat.</p><p>Guy F. no longer poses a risk to the company or to other companies as his data exfiltation will remain on his record.</p><p>Congratulations, you have kept your job as a security analyst and proven yourself a valuable asset to the company.</p><div class=\"ascii-art\"><br>__  __ _       _       _       <br>\\\\ \\/ /(_) __ _| | __ _| |_ ___ <br> \\\\  / | |/ _` | |/ _` | __/ _ \\<br>  /  \\\\ | | (_| | | (_| | ||  __\\<br> /_/\\\\_\\\\| |\\__,_|_|\\__,_|\\__\\___|<br>       |_|<br></div>",
+        "text": "<p>Based on your advice, HR immediately fires Guy F. without giving him a chance to resign or finish any current tasks.</p><p>Your efforts led to identifying the correct suspect for the insider threat, along with mitigating this threat.</p><p>Guy F. no longer poses a risk to the company or to other companies as his data exfiltation will remain on his record.</p><p>Congratulations, you have kept your job as a security analyst and proven yourself a valuable asset to the company.</p>,
         "choices": [
           {
             "text": "End Simulation (Success)",
@@ -1531,4 +1531,5 @@
     ]
   }
 ]
+
 
