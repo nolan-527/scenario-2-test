@@ -620,7 +620,7 @@
           {
             "text": "Contact HR with findings",
             "next": "Contact-HR-with-findings",
-            "penalty": 65,
+            "penalty": 25,
             "mistake": "Contacting HR prematurely without securing the account allows the exfiltration to continue."
           }
         ]
@@ -990,8 +990,8 @@
         "text": "<p>You contact HR with your findings, and they determine that you have probable evidence for an insider threat.</p><p>They go with you and expedite the matter to legal, where it is determined that the only option is for the immediate termination of the employee.</p><p>Law enforcement, enters the building and arrests the employee, seemingly neutralizing the threat.</p><p>Through investigation efforts, detectives understand that this employee was bought out by another leading competitor in the industry and that was the reason for his betrayal.</p><p>Despite you're effective efforts in threat removal, the exfiltration was able to continue for a short time after his termination, and your competitor was able to still gather the data.</p><p>While you are unable to enter a lawsuit with the competitor as no hard evidence linked to them, the future of security and trust for your company has changed forever.</p>",
         "choices": [
           {
-            "text": "End Simulation (Failure)",
-            "next": "End-Loss",
+            "text": "End Simulation (Success)",
+            "next": "End-Win",
             "penalty": 0
           }
         ]
@@ -1531,6 +1531,7 @@
     ]
   }
 ]
+
 
 
 
