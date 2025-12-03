@@ -1862,7 +1862,7 @@
       },
       {
         "id": "Pre-Report-Win",
-        "text": "<p class=\"text-center text-2xl font-bold\">Mission Accomplished</p><p class=\"text-center\">You have successfully navigated the incident. While the threat was severe, your decisions mitigated the damage and ensured the survival of BlueRock Manufacturing.</p><p class=\"text-center\">Review your detailed performance report below.</p>",
+        "text": "<p>The company refuses to pay the ransom.</p><p>Critical systems are rebuilt from clean images and data is restored from verified backups.</p><p>All privileged credentials are rotated, and the environment is hardened with improved monitoring, segmentation, and response procedures.</p><p>A thorough post-incident review is performed, and lessons learned are shared across the organization.</p>",
         "choices": [
           {
             "text": "Generate Final Report",
@@ -1872,7 +1872,7 @@
       },
       {
         "id": "Pre-Report-Loss",
-        "text": "<p class=\"text-center text-2xl font-bold text-red-500\">Simulation Failed</p><p class=\"text-center\">The incident spiraled out of control. Your decisions led to data loss, financial ruin, or severe reputational damage.</p><p class=\"text-center\">Review the breakdown of your errors below to improve next time.</p>",
+        "text": "<p>The organization pays the attackers, either fully or in part, without strong legal or strategic guidance. The decryptor provided only partially works; some systems remain corrupted or fail during the decryption process.</p><p>Later, the attackers reveal they exfiltrated sensitive data and demand a second payment to avoid public release.</p><p>Regulators, customers, and partners lose trust, and the company faces long-term legal and reputational damage.</p>",
         "choices": [
           {
             "text": "Generate Final Report",
@@ -1882,17 +1882,18 @@
       },
       {
         "id": "End-Win",
-        "text": "<p>SUCCESS: The company refuses to pay the ransom.</p><p>Critical systems are rebuilt from clean images and data is restored from verified backups.</p><p>All privileged credentials are rotated, and the environment is hardened with improved monitoring, segmentation, and response procedures.</p><p>A thorough post-incident review is performed, and lessons learned are shared across the organization.</p><p>Outcome: A strong, responsible recovery with long-term security improvements.</p><div class=\"ascii-art\"><br>__  __ _       _       _       <br>\\\\ \\/ /(_) __ _| | __ _| |_ ___ <br> \\\\  / | |/ _` | |/ _` | __/ _ \\<br>  /  \\\\ | | (_| | | (_| | ||  __\\<br> /_/\\\\_\\\\| |\\__,_|_|\\__,_|\\__\\___|<br>       |_|<br></div>",
+        "text": "<p>SUCCESS: You have successfully navigated the incident response process. Your swift and targeted actions saved the company from a major breach. You minimized disruption and secured forensic data for future defenses.</p><div class=\"ascii-art\"><br>__  __ _       _       _       <br>\\\\ \\/ /(_) __ _| | __ _| |_ ___ <br> \\\\  / | |/ _` | |/ _` | __/ _ \\<br>  /  \\\\ | | (_| | | (_| | ||  __\\<br> /_/\\\\_\\\\| |\\__,_|_|\\__,_|\\__\\___|<br>       |_|<br></div>",
         "choices": []
       },
       {
         "id": "End-Loss",
-        "text": "<p>FAILURE: The organization pays the attackers, either fully or in part, without strong legal or strategic guidance.</p><p>The decryptor provided only partially works; some systems remain corrupted or fail during the decryption process.</p><p>Later, the attackers reveal they exfiltrated sensitive data and demand a second payment to avoid public release.</p><p>Regulators, customers, and partners lose trust, and the company faces long-term legal and reputational damage.</p><p>Outcome: Severe financial, legal, and reputational impact with ongoing risk.</p><div class=\"ascii-art\"><br> _       _    _   _   _ <br>| |     | |  | | | | | |<br>| |     | |  | | | | | |<br>| |     | |  | | | | | |<br>| |____ | |__| | | |_| |<br>|______| \\\\____/   \\\\___/ <br></div>",
+        "text": "<p>FAILURE: Your misstep led to a critical failure or a full-scale breach. Sensitive data has been compromised or significant loss occurred. The cleanup will be costly, and the company's reputation is at risk.</p><div class=\"ascii-art\"><br> _       _    _   _   _ <br>| |     | |  | | | | | |<br>| |     | |  | | | | | |<br>| |     | |  | | | | | |<br>| |____ | |__| | | |_| |<br>|______| \\\\____/   \\\\___/ <br></div>",
         "choices": []
       }
     ]
   }
 ]
+
 
 
 
