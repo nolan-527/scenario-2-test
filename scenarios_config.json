@@ -1547,7 +1547,7 @@
         {
           "text": "Start isolating obviously affected systems, but keep it informal",
           "next": "Start-isolating-informally",
-          "penalty": 10,
+          "penalty": 7,
           "mistake": "Delaying formal declaration slows down communication and resource allocation."
         },
         {
@@ -1593,7 +1593,7 @@
         {
           "text": "Pull cables on the most critical systems but leave some “low priority” machines online",
           "next": "Pull-cables-partial-isolation",
-          "penalty": 10,
+          "penalty": 7,
           "mistake": "Leaving 'low priority' machines online allows the attacker to maintain persistence and pivot back."
         },
         {
@@ -1639,7 +1639,7 @@
         {
           "text": "Rely heavily on attackers’ promises while only lightly checking backups",
           "next": "Check-backups-rely-on-ransom",
-          "penalty": 15,
+          "penalty": 13,
           "mistake": "Trusting criminals over your own backups is a high-risk strategy."
         },
         {
@@ -1678,7 +1678,7 @@
         {
           "text": "Continue ad-hoc isolation and focus on “getting people back to work”",
           "next": "Pull-cables-partial-isolation",
-          "penalty": 10,
+          "penalty": 7,
           "mistake": "Prioritizing uptime over containment during active ransomware allows the spread to continue."
         },
         {
@@ -1701,7 +1701,7 @@
         {
           "text": "Focus mainly on restoring user access without deeper evidence collection",
           "next": "Skip-memory-capture",
-          "penalty": 10,
+          "penalty": 8,
           "mistake": "Restoring access on compromised networks risks reinfection."
         },
         {
@@ -1724,7 +1724,7 @@
         {
           "text": "Keep the response internal and begin limited backup checks",
           "next": "Check-backups-rely-on-ransom",
-          "penalty": 10,
+          "penalty": 6,
           "mistake": "Insular responses often miss subtle persistence mechanisms."
         },
         {
@@ -1893,6 +1893,7 @@
   ]
 }
 ]
+
 
 
 
