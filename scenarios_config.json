@@ -1529,8 +1529,351 @@
         "choices": []
       }
     ]
+  },
+  {
+    "scenarioId": "BLUEROCK_RANSOMWARE",
+    "scenarioTitle": "BlueRock Manufacturing Ransomware",
+    "startPassageId": "Start-Ransomware-Scenario",
+    "passages": [
+      {
+        "id": "Start-Ransomware-Scenario",
+        "text": "<p>It is a normal Tuesday morning at BlueRock Manufacturing when employees begin reporting that they cannot open any files on the shared drives.</p><p>Every document now ends with <span style=\"color:red\">.locked</span>. A ransom note appears on multiple screens demanding 50 Bitcoin within 72 hours.</p><p>Email is sluggish, tickets flood the helpdesk, and one of the domain controllers unexpectedly goes offline.</p><p>Production on the factory floor stops completely.</p><p>The Incident Response (IR) team is activated. Their decisions will determine how bad this gets.</p><div class=\"ascii-art\"><br> .--.    .--.<br>|  _|__|_  |<br>| | .--. | |<br>| | |__| | |<br>| |  __  | |<br>| | |__| | |<br>| |______| |<br> '--------' <br></div>",
+        "choices": [
+          {
+            "text": "Escalate quickly and declare a security incident",
+            "next": "Declare-security-incident",
+            "penalty": 0
+          },
+          {
+            "text": "Start isolating obviously affected systems, but keep it informal",
+            "next": "Start-isolating-informally",
+            "penalty": 10,
+            "mistake": "Delaying formal declaration slows down communication and resource allocation."
+          },
+          {
+            "text": "Assume it might be a storage glitch and reboot a few servers",
+            "next": "Assume-storage-glitch-reboot",
+            "penalty": 15,
+            "mistake": "Rebooting without investigation destroys volatile memory evidence (RAM) and can trigger malware persistence mechanisms."
+          }
+        ]
+      },
+      {
+        "id": "Declare-security-incident",
+        "text": "<p>The IR team immediately recognizes this as a likely ransomware incident.</p><p>They formally declare a security incident, notify leadership, and pause non-essential IT changes to avoid making the situation worse.</p><p>They now need to understand what is happening in more detail. What do they focus on?</p>",
+        "choices": [
+          {
+            "text": "Review SIEM and EDR alerts to confirm scope",
+            "next": "Review-SIEM-and-EDR",
+            "penalty": 0
+          },
+          {
+            "text": "Handle the situation only within IT for now, delaying leadership involvement",
+            "next": "Start-isolating-informally",
+            "penalty": 10,
+            "mistake": "Keeping leadership in the dark prevents strategic decision-making and legal preparation."
+          },
+          {
+            "text": "Treat it as a possible glitch and allow some staff to reboot systems",
+            "next": "Assume-storage-glitch-reboot",
+            "penalty": 15,
+            "mistake": "Rebooting destroys forensic evidence."
+          }
+        ]
+      },
+      {
+        "id": "Review-SIEM-and-EDR",
+        "text": "<p>The team dives into SIEM and EDR alerts.</p><p>They identify suspicious activity, rapid file changes, and a likely patient-zero workstation.</p><p>They see evidence of lateral movement to file servers and a domain controller.</p><p>They must now contain the attack carefully. What is their containment strategy?</p>",
+        "choices": [
+          {
+            "text": "Isolate compromised hosts at the network level, but keep them powered on",
+            "next": "Isolate-hosts-network-level",
+            "penalty": 0
+          },
+          {
+            "text": "Pull cables on the most critical systems but leave some “low priority” machines online",
+            "next": "Pull-cables-partial-isolation",
+            "penalty": 10,
+            "mistake": "Leaving 'low priority' machines online allows the attacker to maintain persistence and pivot back."
+          },
+          {
+            "text": "Reboot an infected domain controller to see if it comes back clean",
+            "next": "Reboot-infected-DC",
+            "penalty": 20,
+            "mistake": "Rebooting a DC during an active attack destroys critical logs and evidence."
+          }
+        ]
+      },
+      {
+        "id": "Isolate-hosts-network-level",
+        "text": "<p>The IR team begins preserving forensic evidence.</p><p>They create disk images, capture memory, and export key logs from the patient-zero workstation, compromised file servers, and the affected domain controller.</p><p>Evidence is stored securely with hashes recorded.</p><p>They now need to coordinate broader response. What do they do next?</p>",
+        "choices": [
+          {
+            "text": "Activate the formal ransomware IR playbook and assign clear roles",
+            "next": "Activate-formal-playbook",
+            "penalty": 0
+          },
+          {
+            "text": "Skip memory capture to save time and focus only on log exports",
+            "next": "Skip-memory-capture",
+            "penalty": 5,
+            "mistake": "Memory often contains encryption keys or attacker tools not found in logs."
+          },
+          {
+            "text": "Wipe one of the encrypted file servers immediately to rebuild it faster",
+            "next": "Wipe-server-immediately",
+            "penalty": 20,
+            "mistake": "Wiping systems destroys evidence needed for root cause analysis and insurance claims."
+          }
+        ]
+      },
+      {
+        "id": "Activate-formal-playbook",
+        "text": "<p>The team activates the ransomware IR playbook.</p><p>Roles are clearly assigned: IR lead, IT operations, communications, legal/compliance, and executive liaison. Law enforcement and cyber insurance are notified.</p><p>A central incident log is created to track all actions.</p><p>They must now decide how they will restore business operations. What do they prioritize?</p>",
+        "choices": [
+          {
+            "text": "Verify offline backups and plan for full rebuild and restore",
+            "next": "Verify-offline-backups",
+            "penalty": 0
+          },
+          {
+            "text": "Rely heavily on attackers’ promises while only lightly checking backups",
+            "next": "Check-backups-rely-on-ransom",
+            "penalty": 15,
+            "mistake": "Trusting criminals over your own backups is a high-risk strategy."
+          },
+          {
+            "text": "Allow leadership to handle ransom negotiations with minimal IR input",
+            "next": "Leadership-handles-negotiation",
+            "penalty": 25,
+            "mistake": "Negotiations without technical input can lead to paying for keys that don't work."
+          }
+        ]
+      },
+      {
+        "id": "Verify-offline-backups",
+        "text": "<p>The IR team confirms that the organization has recent, clean, offline backups for critical systems.</p><p>They prepare to rebuild key servers from trusted images and restore data rather than paying the ransom.</p><p>They now present the options to leadership. Leadership decides to:</p>",
+        "choices": [
+          {
+            "text": "Refuse the ransom and proceed with a controlled rebuild and restore",
+            "next": "End-Win"
+          },
+          {
+            "text": "Consider a parallel negotiation “just in case” while still planning backups-first recovery",
+            "next": "Check-backups-rely-on-ransom",
+            "penalty": 5,
+            "mistake": "Engaging in negotiation can sometimes be a valid stall tactic, but carries risks."
+          }
+        ]
+      },
+      {
+        "id": "Start-isolating-informally",
+        "text": "<p>The team recognizes that something serious is happening and starts isolating obviously affected systems, but there is no formal incident declaration yet.</p><p>Communication to leadership is limited, and some staff continue their normal work.</p><p>This slows the attack somewhat, but leaves gaps. What do they do next?</p>",
+        "choices": [
+          {
+            "text": "Formalize the incident, notify leadership, and tighten coordination",
+            "next": "Declare-security-incident",
+            "penalty": -5
+          },
+          {
+            "text": "Continue ad-hoc isolation and focus on “getting people back to work”",
+            "next": "Pull-cables-partial-isolation",
+            "penalty": 10,
+            "mistake": "Prioritizing uptime over containment during active ransomware allows the spread to continue."
+          },
+          {
+            "text": "Assume older servers are not important and ignore them",
+            "next": "Reboot-infected-DC",
+            "penalty": 20,
+            "mistake": "Attackers often use older, unpatched servers as staging grounds."
+          }
+        ]
+      },
+      {
+        "id": "Pull-cables-partial-isolation",
+        "text": "<p>Several key systems are isolated, and some file shares are taken offline.</p><p>However, a few less-visible servers and endpoints remain online and continue encrypting files for a while.</p><p>Impact grows, but not as badly as it could have.</p><p>The IR team needs better visibility and evidence. What is their next move?</p>",
+        "choices": [
+          {
+            "text": "Begin structured log collection and imaging of key systems",
+            "next": "Isolate-hosts-network-level",
+            "penalty": -5
+          },
+          {
+            "text": "Focus mainly on restoring user access without deeper evidence collection",
+            "next": "Skip-memory-capture",
+            "penalty": 10,
+            "mistake": "Restoring access on compromised networks risks reinfection."
+          },
+          {
+            "text": "Delete suspicious tools and files manually without preserving artifacts",
+            "next": "Wipe-server-immediately",
+            "penalty": 15,
+            "mistake": "Deleting artifacts blindly destroys intelligence needed to block the attacker."
+          }
+        ]
+      },
+      {
+        "id": "Skip-memory-capture",
+        "text": "<p>The team collects some critical logs and partial disk images, but their effort is uneven.</p><p>They have enough to see that ransomware spread from one user’s credentials and moved laterally, but some details are still missing.</p><p>Leadership wants to know recovery options. What do they do?</p>",
+        "choices": [
+          {
+            "text": "Engage cyber insurance and/or an external IR partner to strengthen response",
+            "next": "Activate-formal-playbook",
+            "penalty": 0
+          },
+          {
+            "text": "Keep the response internal and begin limited backup checks",
+            "next": "Check-backups-rely-on-ransom",
+            "penalty": 10,
+            "mistake": "Insular responses often miss subtle persistence mechanisms."
+          },
+          {
+            "text": "Allow operations pressure to override containment and push for immediate restoration",
+            "next": "Leadership-handles-negotiation",
+            "penalty": 20,
+            "mistake": "Rushing restoration before full containment usually leads to reinfection."
+          }
+        ]
+      },
+      {
+        "id": "Check-backups-rely-on-ransom",
+        "text": "<p>The organization confirms that backups exist for many systems, though some are outdated or incomplete.</p><p>Leadership is under pressure to reduce downtime and is weighing paying some ransom against relying entirely on backups.</p><p>What direction do they choose?</p>",
+        "choices": [
+          {
+            "text": "Use backups as the primary recovery path and treat ransom only as last resort",
+            "next": "Verify-offline-backups",
+            "penalty": 0
+          },
+          {
+            "text": "Negotiate a reduced ransom while also planning partial recovery from backups",
+            "next": "Negotiate-reduced-ransom",
+            "penalty": 10,
+            "mistake": "Paying ransom funds criminal activity and does not guarantee data return."
+          },
+          {
+            "text": "Quickly agree to the attackers’ terms to speed up restoration",
+            "next": "End-Loss",
+            "penalty": 65,
+            "mistake": "Panic-paying the ransom is the worst possible outcome."
+          }
+        ]
+      },
+      {
+        "id": "Negotiate-reduced-ransom",
+        "text": "<p>Leadership negotiates a reduced ransom while simultaneously preparing to recover from backups.</p><p>A decryptor is eventually obtained and works on many, but not all, systems.</p><p>Some data is lost and a few servers still require full rebuilds.</p><p>Legal and compliance teams coordinate notifications and communication.</p><p>The company’s reputation is impacted but survives.</p><p>Outcome: Recovery is mixed, with higher cost and some reputational damage, but the organization remains operational.</p>",
+        "choices": [
+          {
+            "text": "End Simulation (Mixed Result)",
+            "next": "End-Win"
+          }
+        ]
+      },
+      {
+        "id": "Assume-storage-glitch-reboot",
+        "text": "<p>Several IT staff assume the issue may be a storage or patching problem.</p><p>They begin rebooting servers and endpoints in an attempt to “clear things up.”</p><p>In doing so, they wipe important logs and memory artifacts and restart ransomware processes, leading to even more encryption.</p><p>Containment is not yet in place. What happens next?</p>",
+        "choices": [
+          {
+            "text": "Realize the mistake, declare a formal incident, and stop reboots",
+            "next": "Start-isolating-informally",
+            "penalty": 0
+          },
+          {
+            "text": "Continue rebooting and manually killing processes without a clear plan",
+            "next": "Reboot-infected-DC",
+            "penalty": 15,
+            "mistake": "Flailing without a plan spreads the infection further."
+          },
+          {
+            "text": "Attempt rollbacks and snapshots without understanding the full scope",
+            "next": "Reboot-infected-DC",
+            "penalty": 15,
+            "mistake": "Rolling back snapshots without fixing the vulnerability just restores the system to a state where it can be hacked again."
+          }
+        ]
+      },
+      {
+        "id": "Reboot-infected-DC",
+        "text": "<p>Reboots and uncoordinated actions have allowed the ransomware to spread further.</p><p>Some file shares are still online, and encryption continues in the background.</p><p>Communication is fragmented and no single person is clearly in charge.</p><p>The team must decide how to proceed. What do they do?</p>",
+        "choices": [
+          {
+            "text": "Finally begin isolating systems properly and disabling shared drives",
+            "next": "Pull-cables-partial-isolation",
+            "penalty": -5
+          },
+          {
+            "text": "Focus mainly on the ransom note timer and ignore deeper investigation",
+            "next": "Wipe-server-immediately",
+            "penalty": 20,
+            "mistake": "Panic focusing on the timer leads to bad decision making."
+          },
+          {
+            "text": "Dismiss IR team recommendations and rely solely on a few overworked admins",
+            "next": "Wipe-server-immediately",
+            "penalty": 20,
+            "mistake": "Ignoring the experts is a fatal leadership error."
+          }
+        ]
+      },
+      {
+        "id": "Wipe-server-immediately",
+        "text": "<p>Little forensic evidence remains, and much of the environment is compromised.</p><p>The focus shifts almost entirely to the ransom note. There is still time to make better decisions, but options are narrowing.</p><p>What does leadership decide?</p>",
+        "choices": [
+          {
+            "text": "Call cyber insurance and bring in an external IR partner to help control the damage",
+            "next": "Skip-memory-capture",
+            "penalty": 0
+          },
+          {
+            "text": "Skip evidence collection entirely and focus only on getting decryption keys",
+            "next": "Leadership-handles-negotiation",
+            "penalty": 20,
+            "mistake": "Focusing solely on decryption ignores the risk of data exfiltration and future attacks."
+          },
+          {
+            "text": "Download “free decryptor” tools from the internet and test them directly on production systems",
+            "next": "Leadership-handles-negotiation",
+            "penalty": 30,
+            "mistake": "Using unverified tools on production systems can corrupt data permanently."
+          }
+        ]
+      },
+      {
+        "id": "Leadership-handles-negotiation",
+        "text": "<p>External help has not been fully utilized or is brought in too late.</p><p>Leadership is now primarily focused on getting systems back online as quickly as possible, regardless of long-term risk.</p><p>How do they proceed?</p>",
+        "choices": [
+          {
+            "text": "Involve legal and compliance before making any payment decisions",
+            "next": "Check-backups-rely-on-ransom",
+            "penalty": 0
+          },
+          {
+            "text": "Pay the full ransom quickly with minimal oversight",
+            "next": "End-Loss",
+            "penalty": 65,
+            "mistake": "Paying without oversight is a complete failure of governance."
+          },
+          {
+            "text": "Make a partial payment and attempt to hide the situation from law enforcement",
+            "next": "End-Loss",
+            "penalty": 65,
+            "mistake": "Covering up a breach is illegal in many jurisdictions and worsens the outcome."
+          }
+        ]
+      },
+      {
+        "id": "End-Win",
+        "text": "<p>The company refuses to pay the ransom.</p><p>Critical systems are rebuilt from clean images and data is restored from verified backups.</p><p>All privileged credentials are rotated, and the environment is hardened with improved monitoring, segmentation, and response procedures.</p><p>A thorough post-incident review is performed, and lessons learned are shared across the organization.</p><p>Outcome: A strong, responsible recovery with long-term security improvements.</p><div class=\"ascii-art\"><br>__  __ _       _       _       <br>\\\\ \\/ /(_) __ _| | __ _| |_ ___ <br> \\\\  / | |/ _` | |/ _` | __/ _ \\<br>  /  \\\\ | | (_| | | (_| | ||  __\\<br> /_/\\\\_\\\\| |\\__,_|_|\\__,_|\\__\\___|<br>       |_|<br></div>",
+        "choices": []
+      },
+      {
+        "id": "End-Loss",
+        "text": "<p>The organization pays the attackers, either fully or in part, without strong legal or strategic guidance.</p><p>The decryptor provided only partially works; some systems remain corrupted or fail during the decryption process.</p><p>Later, the attackers reveal they exfiltrated sensitive data and demand a second payment to avoid public release.</p><p>Regulators, customers, and partners lose trust, and the company faces long-term legal and reputational damage.</p><p>Outcome: Severe financial, legal, and reputational impact with ongoing risk.</p><div class=\"ascii-art\"><br> _       _    _   _   _ <br>| |     | |  | | | | | |<br>| |     | |  | | | | | |<br>| |     | |  | | | | | |<br>| |____ | |__| | | |_| |<br>|______| \\\\____/   \\\\___/ <br></div>",
+        "choices": []
+      }
+    ]
   }
 ]
+
 
 
 
